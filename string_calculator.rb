@@ -7,6 +7,9 @@ class Calculator
   def sum
     digits.inject(:+)
   end
+  def multiply
+    digits.inject(:*)
+  end
 
   private
   def parse_input(str)
