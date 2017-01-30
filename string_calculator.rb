@@ -1,15 +1,21 @@
 require 'minitest/autorun'
 class Calculator
-  def initialize(digit_string)
-    @digits = digit_string.split(',').map { |n| n.to_i}
+  attr_reader :digits
+  def initialize(digits_string)
+    @digits = parse_input(digits_string)
   end
   def sum
-    @digits.inject(:+)
+    digits.inject(:+)
+  end
+
+  private
+  def parse_input(str)
+    str.split(',').map { |n| n.to_i}
   end
 end
-  describe Calculator do
-     it 'sums the digits given' do
-     calc = Calculator.new('1,2,3,4')
-     calc.sum.must_equal(10)
+describe Calculator do
+  it 'sums the digits given' do
+    calc = Calculator.new('1,2,3,4')
+    calc.sum.must_equal(10)
   end
 end
