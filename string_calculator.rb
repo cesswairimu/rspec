@@ -18,4 +18,9 @@ describe Calculator do
     calc = Calculator.new('1,2,3,4')
     calc.sum.must_equal(10)
   end
+
+  it 'multiplies the digits' do
+    calc = Calculator.new('4,3')
+    calc.multiply.must_equal(12)
+  end
 end
