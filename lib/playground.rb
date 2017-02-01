@@ -1,5 +1,5 @@
 class Playground
-  def initialize(number_pf_kids)
+  def initialize(number_of_kids)
   end
   def mood
     'boring'
