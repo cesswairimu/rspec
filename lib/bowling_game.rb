@@ -1,8 +1,7 @@
 class BowlingGame
+  attr_reader :score
   def pin(rolls)
+    @score = rolls.inject(:+)
   end
 
-  def score
-    0
-  end
 end
