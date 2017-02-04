@@ -10,7 +10,6 @@ class BowlingGame
   def score
     frame = 0
     score = 0
-    @first_in_frame = 0
 
     while frame < 10
       if spare?
