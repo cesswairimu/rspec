@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
+  get 'achievements/new'
+
   root 'welcome#index'
-  resources :achievement, only: [:new, :create]
+  resources :achievements, only: [:new, :create]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
