@@ -9,7 +9,7 @@ feature 'create' do
     fill_in('Description', with: 'Excellent')
     select('Public', from: 'Privacy')
     check('Featured achievement')
-    attach('Cover image', "#{Rails.root}/spec/fixtures/cover_image.png")
+    attach_file('Cover image', "#{Rails.root}/spec/fixtures/cover_image.png")
     click_on('Create Achievement')
 
     expect(page).to have_content('Achievement has been created')
