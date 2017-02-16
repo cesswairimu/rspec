@@ -7,8 +7,9 @@ RSpec.describe AchievementsController do
       expect(response).to render_template(:new)
     end
   end
-  it "assigns new achivement to @achievement" do
-
+  it "assigns new achievement to @achievement" do
+      get :new
+expect(assigns(:achievement)).to  be_a_new(Achievement)
 
 
   end
