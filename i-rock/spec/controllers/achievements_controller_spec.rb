@@ -6,12 +6,23 @@ RSpec.describe AchievementsController do
       get :new
       expect(response).to render_template(:new)
     end
-  end
-  it "assigns new achievement to @achievement" do
+    it "assigns new achievement to @achievement" do
       get :new
-expect(assigns(:achievement)).to  be_a_new(Achievement)
-
+      expect(assigns(:achievement)).to  be_a_new(Achievement)
+    end
 
   end
 
+  describe "GET show" do
+    let(:achievement) { FactoryGirl.create(:public_achievement) }
+    it "render show template" do
+      get :show, params:{ id: achievement.id }
+      expect(response).to render_template(:show)
+    end
+
+    it 'assigns requested achievement to @achievement' do
+      get :show, params:{ id: achievement.id }
+      expect(assigns(:achievement)).to eq(achievement)
+    end
+  end
 end
