@@ -25,4 +25,20 @@ RSpec.describe AchievementsController do
       expect(assigns(:achievement)).to eq(achievement)
     end
   end
-end
+  
+  describe "POST create" do
+    context "valid data" do
+      it " redirects to achievements#show" do
+        post :create, achievement: FactoryGirl.attributes_for(:public_achievement)
+        expect(response).to redirect_to(achievement_path(assigns[:achievement]))
+      end
+
+      it "creates a new achievement in database" do
+        expect{
+          post :create, achievement: FactoryGirl.attributes_for(:public_achievement)
+        }.to change(Achievement, :count).by(1)
+      end
+    end
+    end
+  end
+
