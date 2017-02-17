@@ -39,6 +39,19 @@ RSpec.describe AchievementsController do
         }.to change(Achievement, :count).by(1)
       end
     end
+    context "invalid data" do
+     it "renders new template" do
+        post :create, achievement: FactoryGirl.attributes_for(:public_achievement, title: ' ')
+        expect(response).to render_template(:new)
+      end
+      it "does not create new achievement" do
+        expect{
+        post :create, achievement: FactoryGirl.attributes_for(:public_achievement, title: ' ')
+        }.not_to change(Achievement, :count)
+      end
+
     end
+    end
+
   end
 
