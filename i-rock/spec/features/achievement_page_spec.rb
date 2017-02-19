@@ -8,10 +8,16 @@ feature 'achievement page' do
    expect(page).to have_content('Just do it')
  end
 
- scenario 'render markdown description' do
-   achievement =FactoryGirl.create(:achievement, description: 'That *was* hard') 
+ # scenario 'render markdown description' do
+ #   achievement =FactoryGirl.create(:achievement, description: 'That *was* hard') 
+ #   visit("/achievements/#{achievement.id}")
+ #   expect(page).to have_css('em', text: 'was')
+# end
+
+  scenario 'render markdown description' do
+   achievement =FactoryGirl.create(:achievement, description: 'That was hard') 
    visit("/achievements/#{achievement.id}")
-   expect(page).to have_css('em', text: 'was')
+   expect(page).to have_content("That was")
 end
- 
+
 end
