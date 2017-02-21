@@ -18,7 +18,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootstrap-sass'
 gem 'simple_form'
 gem 'redcarpet'
-
+gem 'devise'
 group :development do
   gem 'web-console', '>= 3.3.0'
 end
