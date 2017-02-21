@@ -64,9 +64,23 @@ RSpec.describe AchievementsController do
     end
     it "assigns only public achievement to template" do
       public_achievement = FactoryGirl.create(:public_achievement) 
-      private_achievement = FactoryGirl.create(:private_achievement) 
       get :index
       expect(assigns(:achievements)).to match_array([public_achievement]) 
     end
   end
-end
+
+  describe "GET edit" do
+    let(:achievement) { FactoryGirl.create(:public_achievement) }
+    it "renders edit template"do
+      get :edit, params:{ id:achievement }
+      expect(response).to render_template(:edit)
+    end
+    it "assigns the requested achievement to template" do
+    get :edit, params:{
+      id: achievement
+    }
+    expect(assigns(:achievement)).to eq(achievement)
+  end
+  end
+
+ end 
