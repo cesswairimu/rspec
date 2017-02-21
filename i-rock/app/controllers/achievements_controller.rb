@@ -24,6 +24,15 @@ class AchievementsController < ApplicationController
     @achievement = Achievement.find(params[:id])
   end
 
+  def update
+    @achievement = Achievement.find(params[:id])
+    if @achievement.update_attributes(ach_params)
+    redirect_to @achievement
+    else
+      render 'edit'
+    end
+  end
+
   private
   def ach_params
     params.require(:achievement).permit( :title, :description, :featured, :cover_image, :privacy )
