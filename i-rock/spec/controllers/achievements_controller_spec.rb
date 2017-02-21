@@ -1,19 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe AchievementsController do
-  describe 'GET new' do
-    it "render new  template" do
-      get :new
-      expect(response).to render_template(:new)
-    end
-    it "assigns new achievement to @achievement" do
-      get :new
-      expect(assigns(:achievement)).to  be_a_new(Achievement)
-    end
 
-  end
-
-  describe "GET show" do
+describe "guest user" do
+   describe "GET show" do
     let(:achievement) { FactoryGirl.create(:public_achievement) }
     it "render show template" do
       get :show, params:{ id: achievement.id }
@@ -26,7 +16,64 @@ RSpec.describe AchievementsController do
     end
   end
 
-  describe "POST create" do
+describe "get INDEX" do
+    it "render index template" do 
+      get :index
+      expect(response).to render_template(:index)
+    end
+    it "assigns only public achievement to template" do
+      public_achievement = FactoryGirl.create(:public_achievement) 
+      get :index
+      expect(assigns(:achievements)).to match_array([public_achievement]) 
+    end
+  end
+describe "GET new"do
+  it "redirects to login page" do
+    get :new
+    expect(response).to redirect_to(new_user_session_url)
+end
+end
+describe "POST create" do
+it "redirects to login page" do
+  post :create, achievement: FactoryGirl.attributes_for(:public_achievement)
+    expect(response).to redirect_to(new_user_session_url)
+end
+end
+describe "GET edit" do
+  it "redirects to login page" do
+    get :edit
+    expect(response).to redirect_to(new_user_session_url)
+end
+end
+describe "PUT update" do
+  it "redirects to login page" do
+    post :create, params:{ id: FactoryGirl.create(:public_achievement),
+    achievement: FactoryGirl.attributes_for(:public_achievement)}
+    expect(response).to redirect_to(new_user_session_url)
+end
+end
+describe "DELETE destroy" do
+  it "redirects to login page" do
+  delete :destroy , params:{ id: FactoryGirl.create(:public_achievement) }
+    expect(response).to redirect_to(new_user_session_url)
+end
+end
+end
+
+
+  describe 'GET new' do
+    it "render new  template" do
+      get :new
+      expect(response).to render_template(:new)
+    end
+    it "assigns new achievement to @achievement" do
+      get :new
+      expect(assigns(:achievement)).to  be_a_new(Achievement)
+    end
+
+  end
+
+   describe "POST create" do
     context "valid data" do
       let(:valid_data) { FactoryGirl.attributes_for(:public_achievement) }
       it " redirects to achievements#show" do
@@ -57,18 +104,7 @@ RSpec.describe AchievementsController do
     end
   end
 
-  describe "get INDEX" do
-    it "render index template" do 
-      get :index
-      expect(response).to render_template(:index)
-    end
-    it "assigns only public achievement to template" do
-      public_achievement = FactoryGirl.create(:public_achievement) 
-      get :index
-      expect(assigns(:achievements)).to match_array([public_achievement]) 
-    end
-  end
-
+  
   describe "GET edit" do
     let(:achievement) { FactoryGirl.create(:public_achievement) }
     it "renders edit template"do
