@@ -120,5 +120,16 @@ RSpec.describe AchievementsController do
     end
     end
 
+  describe "DELETE destroy" do
+    let(:achievement) { FactoryGirl.create(:public_achievement) }
+    it "redirects to achievements#index" do
+      delete :destroy, params:{ id: achievement }
+      expect(response).to redirect_to(achievements_path)
+    end
+    it "removes achievement from db" do
+      delete :destroy, params:{ id: achievement }
+      expect(Achievement.exists?(:achievement_id)).to be_falsy
+    end
+  end
 
  end 

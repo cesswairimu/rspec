@@ -33,6 +33,12 @@ class AchievementsController < ApplicationController
     end
   end
 
+  def destroy
+     Achievement.destroy(params[:id])
+     redirect_to achievements_path
+  end
+
+
   private
   def ach_params
     params.require(:achievement).permit( :title, :description, :featured, :cover_image, :privacy )
