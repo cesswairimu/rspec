@@ -20,6 +20,10 @@ class AchievementsController < ApplicationController
 @achievements = Achievement.public_access
   end
 
+  def edit
+    @achievement = Achievement.find(params[:id])
+  end
+
   private
   def ach_params
     params.require(:achievement).permit( :title, :description, :featured, :cover_image, :privacy )
