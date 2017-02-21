@@ -25,7 +25,7 @@ RSpec.describe AchievementsController do
       expect(assigns(:achievement)).to eq(achievement)
     end
   end
-  
+
   describe "POST create" do
     context "valid data" do
       let(:valid_data) { FactoryGirl.attributes_for(:public_achievement) }
@@ -38,24 +38,35 @@ RSpec.describe AchievementsController do
       it "creates a new achievement in database" do
         expect{
           post :create, params:{ achievement: valid_data
-        }}.to change(Achievement, :count).by(1)
+          }}.to change(Achievement, :count).by(1)
       end
     end
     context "invalid data" do
       let(:invalid_data){  FactoryGirl.attributes_for(:public_achievement, title: ' ')
-}
-     it "renders new template" do
+      }
+      it "renders new template" do
         post :create,params:{ achievement:   invalid_data } 
-          expect(response).to render_template(:new)
+        expect(response).to render_template(:new)
       end
       it "does not create new achievement" do
         expect{
-        post :create,params:{ achievement: invalid_data
-        }}.not_to change(Achievement, :count)
+          post :create,params:{ achievement: invalid_data
+          }}.not_to change(Achievement, :count)
       end
 
     end
-    end
-
   end
 
+  describe "get INDEX" do
+    it "render index template" do 
+      get :index
+      expect(response).to render_template(:index)
+    end
+    it "assigns only public achievement to template" do
+      public_achievement = FactoryGirl.create(:public_achievement) 
+      private_achievement = FactoryGirl.create(:private_achievement) 
+      get :index
+      expect(assigns(:achievements)).to match_array([public_achievement]) 
+    end
+  end
+end
