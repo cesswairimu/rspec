@@ -1,6 +1,7 @@
 class Achievement < ApplicationRecord
   belongs_to :user
   validates :title, presence: true
+  validates :user, presence: true
   validate :identical_titles
   enum privacy: [:public_access, :private_access, :friends  ]
 
