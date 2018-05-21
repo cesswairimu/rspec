@@ -23,6 +23,6 @@ describe BowlingGame do
 
 it 'scores a perfect game' do
 game.pin([10]*12)
-expect(game.score).to eq(300)
+expect(game.score).to eq(30)
 end
 end

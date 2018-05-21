@@ -11,7 +11,7 @@ describe Playground do
 
     end
 
-    it 'is empty' do 
+    it 'is empty' do
       expect(playground).to be_empty
     end
   end

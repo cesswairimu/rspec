@@ -1,5 +1,5 @@
 class HelloWorld
-  def hello 
-    puts "Hello Rongo! we are here"
+  def hello(msg)
+    puts "#{msg}"
   end
 end
