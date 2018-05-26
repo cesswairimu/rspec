@@ -7,6 +7,7 @@ class AchievementsController < ApplicationController
 
   def create
     @achievement = Achievement.new(ach_params)
+    @achievement.user_id = current_user.id if current_user
     if @achievement.save
       redirect_to achievement_url(@achievement), notice: "Achievement has been created"
     else
@@ -19,7 +20,7 @@ class AchievementsController < ApplicationController
   end
 
   def index
-@achievements = Achievement.public_access
+    @achievements = Achievement.public_access
   end
 
   def edit
@@ -27,19 +28,19 @@ class AchievementsController < ApplicationController
 
   def update
     if @achievement.update_attributes(ach_params)
-    redirect_to @achievement
+      redirect_to @achievement
     else
       render 'edit'
     end
   end
 
   def destroy
-     @achievement.destroy
-     redirect_to achievements_path
+    @achievement.destroy
+    redirect_to achievements_path
   end
 
-
   private
+
   def ach_params
     params.require(:achievement).permit( :title, :description, :featured, :cover_image, :privacy )
   end
