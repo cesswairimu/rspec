@@ -116,14 +116,12 @@ RSpec.describe AchievementsController do
       context "valid data" do
         let(:valid_data) { FactoryGirl.attributes_for(:public_achievement, user: user) }
         it " redirects to achievements#show" do
-          skip
           post :create, params: { achievement:  valid_data
           }
-          expect(response).to redirect_to achievement_path
+          expect(response).to redirect_to achievement_path(assigns[:achievement])
         end
 
         it "creates a new achievement in database" do
-          skip
           expect{
             post :create, params:{ achievement: valid_data
             }}.to change(Achievement, :count).by(1)
